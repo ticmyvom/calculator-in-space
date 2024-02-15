@@ -1,3 +1,5 @@
+const display = document.querySelector('#display');
+
 function add(n1, n2) {
     return +n1 + +n2;
 }
@@ -38,3 +40,8 @@ function operate(operator, num1, num2) {
             console.log(`operate(): ${operator} is undefined.`);
     }
 }
+
+const ceBtn = document.querySelector('.ce-button');
+ceBtn.addEventListener('click', () => {
+    display.textContent = '';
+});
