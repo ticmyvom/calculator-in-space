@@ -48,14 +48,20 @@ ceBtn.addEventListener('click', () => {
     display.textContent = '';
 });
 
+function updateDisplay(content) {
+    display.textContent += content;
+}
+
 numBtns.forEach((numBtn) => {
     numBtn.addEventListener('click', () => {
         console.log(`clicked ${numBtn.textContent} `);
+        updateDisplay(numBtn.textContent);
     });
 });
 
 opBtns.forEach((opBtn) => {
     opBtn.addEventListener('click', () => {
         console.log(`clicked ${opBtn.textContent} `);
+        updateDisplay(opBtn.textContent);
     });
 });
