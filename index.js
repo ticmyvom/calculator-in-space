@@ -72,7 +72,7 @@ function updateDisplay(content) {
 
 numBtns.forEach((numBtn) => {
     numBtn.addEventListener('click', () => {
-        console.log(getCalculatorState());
+        // console.log(getCalculatorState());
         // console.log(`clicked ${numBtn.textContent} `);
 
         if (getCalculatorState() === calcState.op){
@@ -97,7 +97,7 @@ numBtns.forEach((numBtn) => {
 
 opBtns.forEach((opBtn) => {
     opBtn.addEventListener('click', () => {
-        console.log(getCalculatorState());
+        // console.log(getCalculatorState());
         let currentOperator = opBtn.textContent;
 
         // in the beginning, only allow the operator - to be clicked
@@ -143,8 +143,10 @@ opBtns.forEach((opBtn) => {
 
 eqBtn.addEventListener('click', calculate);
 
+// TODO: round off numbers if they're too long. Do it after determine the size of the calculator during CSS
 function calculate() {
-    if (getCalculatorState() === calcState.init){
+    if (getCalculatorState() === calcState.init ||
+        getCalculatorState() === calcState.op){
         return; // do nothing if = is pressed without any input
     }
     
