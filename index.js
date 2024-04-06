@@ -1,6 +1,7 @@
 const display = document.querySelector('#display');
 const prevExprs = document.querySelector('#prev-exprs');
 const ceBtn = document.querySelector('.ce-button');
+const acBtn = document.querySelector('.ac-button')
 const numBtns = document.querySelectorAll('.number-button');
 const opBtns = document.querySelectorAll('.operator-button');
 const eqBtn = document.querySelector('.equal-button');
@@ -65,6 +66,12 @@ function operate(operator, num1, num2) {
 ceBtn.addEventListener('click', () => {
     setCalculatorState(calcState.init);
     display.textContent = '';
+});
+
+acBtn.addEventListener('click', () => {
+    setCalculatorState(calcState.init);
+    display.textContent = '';
+    prevExprs.textContent = '';
 });
 
 function updateDisplay(content) {
