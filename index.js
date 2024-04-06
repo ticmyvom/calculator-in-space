@@ -83,8 +83,8 @@ numBtns.forEach((numBtn) => {
 
         if  (getCalculatorState() === calcState.init){
             if (+numBtn.textContent === 0) {
+                // since we won't evaluate 01 + 2
                 // ignore if 0 is pressed in the beginning
-                // we won't evaluate 01 + 2
                 return;
             }
             else {
