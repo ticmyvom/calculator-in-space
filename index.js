@@ -5,6 +5,8 @@ const acBtn = document.querySelector('.ac-button')
 const numBtns = document.querySelectorAll('.number-button');
 const opBtns = document.querySelectorAll('.operator-button');
 const eqBtn = document.querySelector('.equal-button');
+const musicToggleBtn = document.querySelector('#music-on-off');
+const backgroundAudio = document.querySelector('.background-music audio');
 
 function createEnum(values) {
     const enumObject = {};
@@ -186,6 +188,7 @@ function calculate() {
     prevExprs.appendChild(expressionDiv);
 }
 
+// KEYBOARD SUPPORT
 function getKeyboardSupport(keyboardEvent) {
     let key = keyboardEvent.key;
     // console.log('a key has been pressed down', key);
@@ -226,3 +229,23 @@ function getKeyboardSupport(keyboardEvent) {
 }
 
 document.addEventListener('keydown', getKeyboardSupport);
+
+// AUDIO MUSIC
+musicToggleBtn.addEventListener('click', () => {
+    backgroundAudio.volume = 0.05;
+    backgroundAudio.paused ? backgroundAudio.play() : stopMusic();
+});
+
+function stopMusic() {
+    backgroundAudio.pause();
+    backgroundAudio.currentTime = 0;
+}
+
+// this will repeat the instrumental theme forever or until the user toggles
+// src: https://code-boxx.com/background-music-html/
+backgroundAudio.onended = () => {
+    backgroundAudio.src = 'sound/Power Rangers in Space Instrumental Theme.mp3';
+    backgroundAudio.pause();
+    backgroundAudio.load();
+    backgroundAudio.play();
+}

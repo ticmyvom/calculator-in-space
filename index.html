@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calcunator</title>
+    <title>Astro Morpher Calcunator</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/img/megaranger-favicon.ico">
   </head>
   <body>
     <div id="prev-exprs">
@@ -35,6 +36,15 @@
     <button type="button" class="ce-button" id="ce">CE</button> <!-- Clear Entry -->
 
 
-	<script src="index.js"></script>
+    
+    <button type="button" id="music-on-off">Music Toggle</button> <!-- Play/Stop toggle-->
+    <div class="background-music">
+      <audio src="sound/Power Rangers In Space.mp3">
+        <p>If you are reading this, it is because your browser does not support the audio element.</p>
+      </audio>
+    </div>
+    
+    
+    <script src="index.js"></script>
   </body>
 </html>
