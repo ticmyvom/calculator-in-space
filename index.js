@@ -185,3 +185,44 @@ function calculate() {
     expressionDiv.textContent = expression;
     prevExprs.appendChild(expressionDiv);
 }
+
+function getKeyboardSupport(keyboardEvent) {
+    let key = keyboardEvent.key;
+    // console.log('a key has been pressed down', key);
+    switch (key) {
+        //   case '.':
+        //     document.getElementById('dot').click();
+        //     break;
+
+        case 'Backspace':
+            document.getElementById("ce").click();
+            break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            // console.log('key is ', key, typeof key);
+            document.getElementById(key).click();
+            break;
+        case '+':
+        case '-':
+        case '/':
+        case '*':
+            document.getElementById(key).click();
+            break;
+        case '=':
+            document.getElementById(key).click();
+            break;
+        default:
+            break;
+    }
+    return false;
+}
+
+document.addEventListener('keydown', getKeyboardSupport);
