@@ -1,5 +1,9 @@
 #display, #prev-exprs {
     min-height: 4vh;
-    border: solid black;
+    border: solid lightblue;
     margin: 1vh;
 }
+
+/* body {
+    background-image: url('./img/star-starry-sky-night-backgrounds-textures-ac0cd5-1024.jpg');
+} */
