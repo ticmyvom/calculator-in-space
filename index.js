@@ -145,6 +145,8 @@ opBtns.forEach((opBtn) => {
 eqBtn.addEventListener('click', calculate);
 
 // TODO: round off numbers if they're too long. Do it after determine the size of the calculator during CSS
+// TODO: - Fix: when calculating, if the first character is 0, remove it
+
 function calculate() {
     if (getCalculatorState() === calcState.init ||
         getCalculatorState() === calcState.op){
@@ -171,7 +173,8 @@ function calculate() {
     setCalculatorState(calcState.num1);
     // console.log(num1, operator, num2, '=', result);
 
+    const expressionDiv = document.createElement("div");
     expression = expression.concat("=", result.toString());
-    prevExprs.append('<br></br>');
-    prevExprs.append(expression);
+    expressionDiv.textContent = expression;
+    prevExprs.appendChild(expressionDiv);
 }
