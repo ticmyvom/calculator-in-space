@@ -60,6 +60,8 @@ function operate(operator, num1, num2) {
             return multiply(num1, num2);
         case "/":
             return divide(num1, num2);
+        case ".":
+            return 'Decimal is not supported in this version.'
         default:
             return (`${operator} is undefined.`);
         }
