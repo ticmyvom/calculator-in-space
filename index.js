@@ -1,4 +1,5 @@
 const display = document.querySelector('#display');
+const prevExprs = document.querySelector('#prev-exprs');
 const ceBtn = document.querySelector('.ce-button');
 const numBtns = document.querySelectorAll('.number-button');
 const opBtns = document.querySelectorAll('.operator-button');
@@ -151,6 +152,7 @@ function calculate() {
     }
     
     let input = display.textContent;
+    let expression = display.textContent;
     input = input.replace(/\s+/g, '');
     // console.log('before parsing: ', input);
     
@@ -168,4 +170,8 @@ function calculate() {
     display.textContent = result;
     setCalculatorState(calcState.num1);
     // console.log(num1, operator, num2, '=', result);
+
+    expression = expression.concat("=", result.toString());
+    prevExprs.append('<br></br>');
+    prevExprs.append(expression);
 }
