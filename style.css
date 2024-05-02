@@ -21,7 +21,7 @@ body, html {
     height: 100%;
 }
 
-#morpher {
+img#morpher {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -31,19 +31,52 @@ body, html {
     width: 50%;
     height: 50%;
     z-index: 1;
+
+    border: solid yellowgreen 1px;
 }
 
 .buttons-and-displays {
     display: flex;
-    flex-direction: column;
     width: 30vw;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-20%, -50%);
+    max-width: 50%;
+    max-height: 50%;
+    width: 30%;
+    height: 50%;
+    z-index: 2;
+
+    border: solid blue 1px;
     
 }
 
-.first {
+.left {
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
 
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+    margin: 2.61vh;
+}
+
+.operator-button {
+    /* margin: 0.1em;
+    padding: 0.1em 0.5em; */
+    font-size: 2vh;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .two-displays {
@@ -53,22 +86,6 @@ body, html {
 
 #prev-exprs, #display {
     min-width: 22vw;
-}
-
-.second {
-    display: flex;
-    justify-content: space-between;
-}
-
-.operators {
-    display: flex;
-    flex-direction: column;
-}
-
-.operator-button {
-    /* margin: 0.1em;
-    padding: 0.1em 0.5em; */
-    font-size: 2vh;
 }
 
 .central-buttons {
@@ -81,7 +98,7 @@ body, html {
     /* flex-grow: 1;  */
     /* max-width: calc(100% / 4);  */
     /* margin: 2px;  */
-    font-size: 2vh; 
+    font-size: 1.5vh; 
     width: 1vw;
     flex: 0 0 33.3333%;
 }
