@@ -10,38 +10,26 @@
   </head>
   <body>
     <div class="header">
-      <button type="button" id="music-on-off">Music Toggle</button> <!-- Play/Stop toggle-->
+      <button type="button" id="music-on-off">Music Toggle</button> <!-- Play/Stop toggle -->
       <div class="background-music">
         <audio src="sound/Power Rangers In Space.mp3">
           <p>If you are reading this, it is because your browser does not support the audio element.</p>
         </audio>
       </div>
+      <button type="button" id="help">?</button> <!-- Add functionality -->
     </div>
-    
-    <button type="button" id="help">?</button> <!-- Add functionality -->
-    <!-- Use a container class to organize -->
     <div class="container">
-      <div class="imgage"> 
+      <div class="morpher-container"> 
         <img id="morpher" src="/img/open_morpher_no_background.png" alt="a closed astro morpher">
-      </div>
-
-      <div class="buttons-and-displays">
-        <div class="left">
-          <div class="operators">
-            <button type="button" class="operator-button" id="+">+</button>
-            <button type="button" class="operator-button" id="-">-</button>
-            <button type="button" class="operator-button" id="*">*</button>
-            <button type="button" class="operator-button" id="/">/</button>
-          </div>
+        <div id="operator-container">
+          <button type="button" class="operator-button" id="+">+</button>
+          <button type="button" class="operator-button" id="-">-</button>
+          <button type="button" class="operator-button" id="*">*</button>
+          <button type="button" class="operator-button" id="/">/</button>
         </div>
-        <div class="right">
-          <div class="two-displays">
-            <div id="prev-exprs">
-            </div>
-            <div id="display">
-            </div>
-          </div>
-          <div class="central-buttons">
+        <div id="central-displays-and-buttons">
+          
+          <div id="number-button-container">
             <button type="button" class="number-button" id="1">1</button>
             <button type="button" class="number-button" id="2">2</button>
             <button type="button" class="number-button" id="3">3</button>
@@ -51,19 +39,39 @@
             <button type="button" class="number-button" id="7">7</button>
             <button type="button" class="number-button" id="8">8</button>
             <button type="button" class="number-button" id="9">9</button>
-            <button type="button" class="ce-button" id="ce">CE</button> <!-- Clear Entry -->
+            <button type="button" class="ce-button" id="ce">CE</button> 
             <button type="button" class="number-button" id="0">0</button>
             <button type="button" class="equal-button" id="=">=</button>
           </div>
-          <button type="button" class="ac-button">AC</button> <!-- All Clear -->
+          
+        </div>
+      </div>
+    </div> <!-- end container div -->
+      
+    <!-- Use a container class to organize -->
+
+      <!-- <div class="left">
+        
+      </div> -->
+
+      <!-- <div class="buttons-and-displays">
+        
+        <div class="right">
+          <div class="two-displays">
+            <div id="prev-exprs">
+            </div>
+            <div id="display">
+            </div>
+          </div>
+          
+          <button type="button" class="ac-button">AC</button> 
         </div>
         
-      </div>
+      </div> -->
     
-    </div> <!-- end container div -->
-
-   
-    
+    <!-- Load JS last! -->
     <script src="index.js"></script>
+    <!-- Music auto-play. Will delete this if Music Toggle button works again -->
+    <!-- <audio src="sound/Power Rangers In Space.mp3" autoplay loop></audio> -->
   </body>
 </html>
