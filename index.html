@@ -20,7 +20,7 @@
     </div>
     <div class="container">
       <div class="morpher-container"> 
-        <img id="morpher" src="/img/open_morpher_no_background.png" alt="a closed astro morpher">
+        <img id="morpher" src="/img/open_morpher_no_background.png" alt="an open astro morpher">
         <div id="operator-container">
           <button type="button" class="operator-button" id="+">+</button>
           <button type="button" class="operator-button" id="-">-</button>
@@ -28,7 +28,12 @@
           <button type="button" class="operator-button" id="/">/</button>
         </div>
         <div id="central-displays-and-buttons">
-          
+          <div class="two-displays">
+            <div id="prev-exprs">
+            </div>
+            <div id="display">
+            </div>
+          </div>
           <div id="number-button-container">
             <button type="button" class="number-button" id="1">1</button>
             <button type="button" class="number-button" id="2">2</button>
@@ -43,35 +48,12 @@
             <button type="button" class="number-button" id="0">0</button>
             <button type="button" class="equal-button" id="=">=</button>
           </div>
-          
+          <button type="button" class="ac-button">AC</button> 
         </div>
       </div>
     </div> <!-- end container div -->
-      
-    <!-- Use a container class to organize -->
-
-      <!-- <div class="left">
-        
-      </div> -->
-
-      <!-- <div class="buttons-and-displays">
-        
-        <div class="right">
-          <div class="two-displays">
-            <div id="prev-exprs">
-            </div>
-            <div id="display">
-            </div>
-          </div>
-          
-          <button type="button" class="ac-button">AC</button> 
-        </div>
-        
-      </div> -->
     
     <!-- Load JS last! -->
     <script src="index.js"></script>
-    <!-- Music auto-play. Will delete this if Music Toggle button works again -->
-    <!-- <audio src="sound/Power Rangers In Space.mp3" autoplay loop></audio> -->
   </body>
 </html>
