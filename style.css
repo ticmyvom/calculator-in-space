@@ -69,19 +69,30 @@ body, html {
   align-items: center;
 
   position: absolute;
-  top: 47.3%;
-  left: 64.1%;
+  top: 48.5%;
+  left: 64.3%;
   transform: translate(-50%, -50%);
 
   width: 20.5%;
-  aspect-ratio: 1 / 2.1;
+  aspect-ratio: 1 / 2.0;
 }
 
 .two-displays {
   width: 85%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 3 / 2.5;
   border: 1px solid yellow;
   color: yellow;
+  /* margin-bottom: -20%; */
+}
+
+#main-buttons-container {
+  /* margin-bottom: 20%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 2vw;
 }
 
 #number-button-container {
@@ -90,9 +101,13 @@ body, html {
  display: grid;
  grid-template-columns: repeat(3, 1fr);
  grid-template-rows: repeat(4, 1fr);
- gap: 0.4vw;
+ gap: 0.3vw;
 }
 
 .number-button, .ce-button, .equal-button {
-  font-size: 1.8vw;
+  font-size: 2vw;
+}
+
+.ac-button {
+  font-size:4.6vw;
 }
