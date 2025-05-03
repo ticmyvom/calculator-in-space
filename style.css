@@ -5,6 +5,10 @@ body, html {
   height: 100%;
 }
 
+body {
+    background-image: url('./img/star-starry-sky-night-backgrounds-textures-ac0cd5-1024.jpg');
+}
+
 /*OPTIONAL, but recommended:
   * Prevents borders and padding from messing with
     explicitly declared height or width.
@@ -60,6 +64,9 @@ body, html {
 
 .operator-button {
   font-size: 1.9vw;
+  background-color: transparent;
+  color: white;
+  border: none;
 }
 
 .two-displays {
@@ -90,6 +97,9 @@ body, html {
 
 .number-button, .ce-button, .equal-button {
   font-size: 2vw;
+  background-color: transparent;
+  color: transparent;
+  border: none;
 }
 
 .ac-button {
@@ -98,4 +108,8 @@ body, html {
   left: 64%;
   transform: translate(-50%, -50%);
   font-size:4.5vw;
+
+  background-color: transparent;
+  color: white;
+  border: none;
 }
