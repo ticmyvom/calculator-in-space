@@ -187,7 +187,7 @@ function calculate() {
     const expressionDiv = document.createElement("div");
     expression = expression.concat("=", result.toString());
     expressionDiv.textContent = expression;
-    prevExprs.appendChild(expressionDiv);
+    prevExprs.prepend(expressionDiv);
 }
 
 // KEYBOARD SUPPORT
