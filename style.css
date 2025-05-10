@@ -88,6 +88,7 @@ body {
   background-color: lightgray;
   /* height: 83.33%; */
   height: 80%;
+  overflow: auto;
 }
 
 #display {
@@ -95,6 +96,7 @@ body {
   color: white;
   /* height: 16.67%; */
   height: 20%;
+  overflow: auto;
 }
 
 #number-button-container {
