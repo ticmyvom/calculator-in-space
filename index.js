@@ -182,6 +182,8 @@ function calculate() {
     // console.log(input);
     operator = input[0];
     num2 = parseInt(input.substring(1));
+    
+    if (isNaN(num2)) return; // so that we don't evaluate "num1--"
 
     let result = operate(operator, num1, num2);
     display.textContent = result;
