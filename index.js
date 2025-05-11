@@ -226,7 +226,7 @@ function getKeyboardSupport(keyboardEvent) {
             break;
         case '+':
         case '-':
-        case '/':
+        case '/': // pressing / on Firefox opens the Quick Find at the bottom. Proceed with caution.
         case '*':
             document.getElementById(key).click();
             break;
