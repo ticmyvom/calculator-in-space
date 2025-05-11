@@ -199,14 +199,14 @@ function calculate() {
 // KEYBOARD SUPPORT
 function getKeyboardSupport(keyboardEvent) {
     let key = keyboardEvent.key;
-    console.log('a key has been pressed down', key);
+    // console.log('a key has been pressed down', key);
     switch (key) {
         //   case '.':
         //     document.getElementById('dot').click();
         //     break;
 
         case 'Backspace':
-            document.getElementById("ce").click();
+            ceBtn.click();
             break;
         case '0':
         case '1':
