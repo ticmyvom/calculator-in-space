@@ -169,10 +169,13 @@ function calculate() {
     input = input.replace(/\s+/g, '');
     // console.log('before parsing: ', input);
     
+    // remove leading 0s
+    input = input.replace(/^0+/, '');
+
     let num1,
         num2,
         operator;
-
+    
     num1 = parseInt(input)
     input = input.replace(String(num1), '');
     // console.log(input);
