@@ -199,7 +199,7 @@ function calculate() {
 // KEYBOARD SUPPORT
 function getKeyboardSupport(keyboardEvent) {
     let key = keyboardEvent.key;
-    // console.log('a key has been pressed down', key);
+    console.log('a key has been pressed down', key);
     switch (key) {
         //   case '.':
         //     document.getElementById('dot').click();
@@ -227,8 +227,9 @@ function getKeyboardSupport(keyboardEvent) {
         case '*':
             document.getElementById(key).click();
             break;
+        case 'Enter':
         case '=':
-            document.getElementById(key).click();
+            eqBtn.click();
             break;
         default:
             break;
