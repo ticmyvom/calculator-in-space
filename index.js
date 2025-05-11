@@ -208,6 +208,9 @@ function getKeyboardSupport(keyboardEvent) {
         case 'Backspace':
             ceBtn.click();
             break;
+        case 'Escape':
+            acBtn.click();
+            break;
         case '0':
         case '1':
         case '2':
