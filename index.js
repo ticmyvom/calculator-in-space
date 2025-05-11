@@ -160,7 +160,8 @@ eqBtn.addEventListener('click', calculate);
 
 function calculate() {
     if (getCalculatorState() === calcState.init ||
-        getCalculatorState() === calcState.op){
+        getCalculatorState() === calcState.num1 ||
+        getCalculatorState() === calcState.op ){
         return; // do nothing if = is pressed without any input
     }
     
