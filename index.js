@@ -171,6 +171,10 @@ eqBtn.addEventListener('click', calculate);
 // TODO: - Fix: when calculating, if the first character is 0, remove it
 
 function calculate() {
+    // Play button sound 
+    const audio = new Audio("sound/Enter.mp3");
+    audio.play();
+
     if (getCalculatorState() === calcState.init ||
         getCalculatorState() === calcState.num1 ||
         getCalculatorState() === calcState.op ){
