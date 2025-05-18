@@ -196,15 +196,16 @@ function calculate() {
     // remove leading 0s
     input = input.replace(/^0+/, '');
 
-    let num1,
-        num2,
-        operator;
-    
-    num1 = parseFloat(input)
-    input = input.replace(String(num1), '');
+    const validExpression = /^(?<num1>-?[\d]+(\.?[\d]+)*)(?<operator>[+\-*\/])(?<num2>-?[\d]+(\.?[\d]+)*)$/;
+    // console.log(input.match(validExpression).groups);
+    let parsedInput = input.match(validExpression).groups;
+    let num1 = parsedInput.num1,
+        num2 = parsedInput.num2,
+        operator = parsedInput.operator;
+
     // console.log(input);
-    operator = input[0];
-    num2 = parseFloat(input.substring(1));
+    num1 = parseFloat(num1)
+    num2 = parseFloat(num2);
     
     if (isNaN(num2)) return; // so that we don't evaluate "num1--"
 
