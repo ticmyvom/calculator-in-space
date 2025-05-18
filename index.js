@@ -95,6 +95,10 @@ numBtns.forEach((numBtn) => {
         // console.log(getCalculatorState());
         // console.log(`clicked ${numBtn.textContent} `);
 
+        // Play button sound 
+        const numberAudio = new Audio(`sound/${numBtn.textContent}.mp3`);
+        numberAudio.play();
+
         if (getCalculatorState() === calcState.op){
             setCalculatorState(calcState.num2);
             updateDisplay(numBtn.textContent);
@@ -113,9 +117,6 @@ numBtns.forEach((numBtn) => {
         }
         updateDisplay(numBtn.textContent);
 
-        // Play button sound 
-        const numberAudio = new Audio(`sound/${numBtn.textContent}.mp3`);
-        numberAudio.play();
     });
 });
 
