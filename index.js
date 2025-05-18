@@ -60,8 +60,6 @@ function operate(operator, num1, num2) {
             return multiply(num1, num2);
         case "/":
             return divide(num1, num2);
-        case ".":
-            return 'Decimal is not supported in this version.'
         default:
             return (`${operator} is undefined.`);
         }
@@ -202,11 +200,11 @@ function calculate() {
         num2,
         operator;
     
-    num1 = parseInt(input)
+    num1 = parseFloat(input)
     input = input.replace(String(num1), '');
     // console.log(input);
     operator = input[0];
-    num2 = parseInt(input.substring(1));
+    num2 = parseFloat(input.substring(1));
     
     if (isNaN(num2)) return; // so that we don't evaluate "num1--"
 
@@ -259,10 +257,25 @@ function getKeyboardSupport(keyboardEvent) {
         case '=':
             eqBtn.click();
             break;
+        case '.':
+            handlingDecimal();
+            break;
         default:
             break;
     }
     return false;
+}
+
+function handlingDecimal() {
+    const enteringNum1Regex = /^-?[\d]+$/;
+    const enteringNum2Regex = /^-?[\d]+(?:\.?[\d]+)*[+\-*\/]-?[\d]+$/;
+    if (enteringNum1Regex.test(display.textContent.trim()) ||
+        enteringNum2Regex.test(display.textContent.trim())) {
+            updateDisplay('.');
+    } else {
+        console.log("not gonna update with .")
+        console.log(display.textContent.trim())
+    }
 }
 
 document.addEventListener('keydown', getKeyboardSupport);
