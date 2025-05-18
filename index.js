@@ -171,16 +171,19 @@ opBtns.forEach((opBtn) => {
     });
 });
 
-eqBtn.addEventListener('click', calculate);
+eqBtn.addEventListener('click', () => {
+    // Play button sound 
+    const audio = new Audio("sound/Enter.mp3");
+    audio.volume = 0.5;
+    audio.play();
+
+    calculate();
+});
 
 // TODO: round off numbers if they're too long. Do it after determine the size of the calculator during CSS
 // TODO: - Fix: when calculating, if the first character is 0, remove it
 
 function calculate() {
-    // Play button sound 
-    const audio = new Audio("sound/Enter.mp3");
-    audio.play();
-
     if (getCalculatorState() === calcState.init ||
         getCalculatorState() === calcState.num1 ||
         getCalculatorState() === calcState.op ){
