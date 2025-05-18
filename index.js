@@ -71,12 +71,16 @@ ceBtn.addEventListener('click', () => {
     // Play button sound 
     const audio = new Audio("sound/communicating.mp3");
     audio.play();
-    
+
     setCalculatorState(calcState.init);
     display.textContent = '';
 });
 
 acBtn.addEventListener('click', () => {
+    // Play button sound 
+    const audio = new Audio("sound/lid_open.mp3");
+    audio.play();
+
     setCalculatorState(calcState.init);
     display.textContent = '';
     prevExprs.textContent = '';
