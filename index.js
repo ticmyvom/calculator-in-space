@@ -104,6 +104,10 @@ numBtns.forEach((numBtn) => {
             }
         }
         updateDisplay(numBtn.textContent);
+
+        // Play button sound 
+        const numberAudio = new Audio(`sound/${numBtn.textContent}.mp3`);
+        numberAudio.play();
     });
 });
 
