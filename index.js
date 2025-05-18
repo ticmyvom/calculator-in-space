@@ -152,6 +152,11 @@ opBtns.forEach((opBtn) => {
         }
 
         if (getCalculatorState() === calcState.num1){
+            if (/[\d]+/.test(display.textContent) === false) {
+                // console.log("no multiple ops allows when entering num1")
+                return
+            };
+            
             setCalculatorState(calcState.op);
             updateDisplay(currentOperator);
             return;
