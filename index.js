@@ -7,6 +7,7 @@ const opBtns = document.querySelectorAll('.operator-button');
 const eqBtn = document.querySelector('.equal-button');
 const musicToggleBtn = document.querySelector('#music-on-off');
 const backgroundAudio = document.querySelector('.background-music audio');
+let decimals = 3;
 
 function createEnum(values) {
     const enumObject = {};
@@ -104,14 +105,7 @@ numBtns.forEach((numBtn) => {
         }
 
         if  (getCalculatorState() === calcState.init){
-            if (+numBtn.textContent === 0) {
-                // since we won't evaluate 01 + 2
-                // ignore if 0 is pressed in the beginning
-                return;
-            }
-            else {
-                setCalculatorState(calcState.num1);
-            }
+            setCalculatorState(calcState.num1);
         }
         updateDisplay(numBtn.textContent);
 
@@ -193,10 +187,8 @@ function calculate() {
     input = input.replace(/\s+/g, '');
     // console.log('before parsing: ', input);
     
-    // remove leading 0s
-    input = input.replace(/^0+/, '');
-
     const validExpression = /^(?<num1>-?[\d]+(\.?[\d]+)*)(?<operator>[+\-*\/])(?<num2>-?[\d]+(\.?[\d]+)*)$/;
+    // console.log(input);
     // console.log(input.match(validExpression).groups);
     let parsedInput = input.match(validExpression).groups;
     let num1 = parsedInput.num1,
@@ -210,6 +202,7 @@ function calculate() {
     if (isNaN(num2)) return; // so that we don't evaluate "num1--"
 
     let result = operate(operator, num1, num2);
+    result = parseFloat(result.toFixed(decimals));
     display.textContent = result;
     setCalculatorState(calcState.num1);
     // console.log(num1, operator, num2, '=', result);
@@ -273,10 +266,11 @@ function handlingDecimal() {
     if (enteringNum1Regex.test(display.textContent.trim()) ||
         enteringNum2Regex.test(display.textContent.trim())) {
             updateDisplay('.');
-    } else {
-        console.log("not gonna update with .")
-        console.log(display.textContent.trim())
     }
+    // else {
+    //     console.log("not gonna update with .")
+    //     console.log(display.textContent.trim())
+    // }
 }
 
 document.addEventListener('keydown', getKeyboardSupport);
