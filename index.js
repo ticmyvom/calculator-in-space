@@ -68,6 +68,10 @@ function operate(operator, num1, num2) {
 }
 
 ceBtn.addEventListener('click', () => {
+    // Play button sound 
+    const audio = new Audio("sound/communicating.mp3");
+    audio.play();
+    
     setCalculatorState(calcState.init);
     display.textContent = '';
 });
