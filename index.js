@@ -125,6 +125,25 @@ opBtns.forEach((opBtn) => {
         // console.log(getCalculatorState());
         let currentOperator = opBtn.textContent;
 
+        // Play MEGA sound
+        let opToMEGA = "";
+        switch (currentOperator) {
+            case "+":
+                opToMEGA = "M";
+                break;
+            case "-":
+                opToMEGA = "E";
+                break;
+            case "*":
+                opToMEGA = "G";
+                break;
+            case "/":
+                opToMEGA = "A";
+                break;
+        }
+        const opAudio = new Audio(`sound/${opToMEGA}.mp3`);
+        opAudio.play();
+
         // in the beginning, only allow the operator - to be clicked
         if (getCalculatorState() === calcState.init && currentOperator === '-'){
             setCalculatorState(calcState.num1);
