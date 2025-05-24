@@ -56,15 +56,16 @@ body {
   width: 5.8%;
   height: auto;
   position: absolute;
-  top: 54.9%;  /* Adjust this to place buttons where you want */
+  top: 54.75%;  /* Adjust this to place buttons where you want */
   left: 49.5%;
   transform: translate(-50%, -50%); /* Center align */
-  gap: 0.42vw;
+  gap: 0.61vw;
 }
 
 .operator-button {
   font-size: 1.9vw;
   background-color: transparent;
+  /* background-color: rgba(255,255,255,0.5); */
   color: white;
   border: none;
 }

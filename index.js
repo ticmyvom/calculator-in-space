@@ -57,9 +57,9 @@ function operate(operator, num1, num2) {
             return add(num1, num2);
         case "-":
             return subtract(num1, num2);
-        case "*":
+        case "×":
             return multiply(num1, num2);
-        case "/":
+        case "÷":
             return divide(num1, num2);
         default:
             return (`${operator} is undefined.`);
@@ -115,7 +115,14 @@ numBtns.forEach((numBtn) => {
 opBtns.forEach((opBtn) => {
     opBtn.addEventListener('click', () => {
         // console.log(getCalculatorState());
-        let currentOperator = opBtn.textContent;
+        let currentOperator;
+        if (opBtn.textContent === "−") {
+            // mixing - and − is not ideal so I'll stick with -
+            // − is just the subtraction symbol since it looks better
+            currentOperator = "-";
+        } else {
+            currentOperator = opBtn.textContent;
+        }
 
         // in the beginning, only allow the operator - to be clicked
         if (getCalculatorState() === calcState.init && currentOperator === '-'){
@@ -187,7 +194,7 @@ function calculate() {
     input = input.replace(/\s+/g, '');
     // console.log('before parsing: ', input);
     
-    const validExpression = /^(?<num1>-?[\d]+(\.?[\d]+)*)(?<operator>[+\-*\/])(?<num2>-?[\d]+(\.?[\d]+)*)$/;
+    const validExpression = /^(?<num1>-?[\d]+(\.?[\d]+)*)(?<operator>[+\-×÷])(?<num2>-?[\d]+(\.?[\d]+)*)$/;
     // console.log(input);
     // console.log(input.match(validExpression).groups);
     let parsedInput = input.match(validExpression).groups;
@@ -262,7 +269,7 @@ function getKeyboardSupport(keyboardEvent) {
 
 function handlingDecimal() {
     const enteringNum1Regex = /^-?[\d]+$/;
-    const enteringNum2Regex = /^-?[\d]+(?:\.?[\d]+)*[+\-*\/]-?[\d]+$/;
+    const enteringNum2Regex = /^-?[\d]+(?:\.?[\d]+)*[+\-×÷]-?[\d]+$/;
     if (enteringNum1Regex.test(display.textContent.trim()) ||
         enteringNum2Regex.test(display.textContent.trim())) {
             updateDisplay('.');
