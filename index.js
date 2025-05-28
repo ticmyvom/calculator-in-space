@@ -8,6 +8,12 @@ const eqBtn = document.querySelector('.equal-button');
 const musicToggleBtn = document.querySelector('#music-on-off');
 const backgroundAudio = document.querySelector('.background-music audio');
 let decimals = 3;
+const leds = [
+    document.getElementById("LED-+-on"),
+    document.getElementById("LED---on"),
+    document.getElementById("LED-*-on"),
+    document.getElementById("LED-/-on")
+]
 
 function createEnum(values) {
     const enumObject = {};
@@ -176,6 +182,8 @@ eqBtn.addEventListener('click', () => {
     audio.volume = 0.5;
     audio.play();
 
+    blinkAllLedsTwice();
+
     calculate();
 });
 
@@ -300,4 +308,32 @@ backgroundAudio.onended = () => {
     backgroundAudio.pause();
     backgroundAudio.load();
     backgroundAudio.play();
+}
+
+const turnLedOn = (ledIndex) => {
+    leds[ledIndex].classList.add("led-on");
+    // leds[ledIndex].style.opacity = 1;
+    // console.log(leds[ledIndex], " should be on now");
+}
+
+const turnLedOff = (ledIndex) => {
+    leds[ledIndex].classList.remove("led-on");
+}
+
+// turnLedOff(2);
+const blinkAllLeds = () => {
+    for (let i = 0; i < leds.length; i++) {
+        turnLedOn(i);
+    }
+    
+    setTimeout(() => {
+        for (let i = 0; i < leds.length; i++) {
+            turnLedOff(i);
+        }
+    }, 200);
+}
+
+const blinkAllLedsTwice = () => {
+    blinkAllLeds();
+    setTimeout(blinkAllLeds, 400);
 }

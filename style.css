@@ -50,24 +50,112 @@ body {
   display: block;
 }
 
-#operator-container {
-  display: flex;
-  flex-direction: column;
-  width: 5.8%;
-  height: auto;
-  position: absolute;
-  top: 54.75%;  /* Adjust this to place buttons where you want */
-  left: 49.5%;
-  transform: translate(-50%, -50%); /* Center align */
-  gap: 0.61vw;
-}
-
 .operator-button {
   font-size: 1.9vw;
   background-color: transparent;
   /* background-color: rgba(255,255,255,0.5); */
   color: white;
   border: none;
+  border-radius: 0.5vw;
+
+  width: 5.1%;
+  height: 4.4%;
+}
+
+.led {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.01s;
+  pointer-events: none;
+}
+
+.led-on {
+  opacity: 1;
+}
+
+#\+.operator-button {
+  position: absolute;
+  top: 45.4%; 
+  left: 49.5%;
+  transform: translate(-50%, -50%);
+  /* background-color: rgba(224, 255, 255, 0.97); */
+  
+  width: 6%;
+  height: 5.3%;
+}
+
+#LED-\+-on {
+  top: 45.4%; 
+  left: 49.5%;
+  transform: translate(-50%, -50%);
+  filter: hue-rotate(-20deg);
+  
+  width: 6%;
+  height: 5.3%;
+}
+
+#\-.operator-button {
+  position: absolute;
+  top: 51.6%;  
+  left: 49.5%;
+  transform: translate(-50%, -50%);
+  /* background-color: rgba(224, 255, 255, 0.97); */
+
+  width: 6%;
+  height: 5.5%;
+}
+
+#LED---on {
+  top: 51.6%;  
+  left: 49.5%;
+  transform: translate(-50%, -50%);
+  filter: hue-rotate(-20deg);
+  /* filter: brightness(160%); */
+
+  width: 6%;
+  height: 5.5%;
+}
+
+#\*.operator-button {
+  position: absolute;
+  top: 58%;  
+  left: 49.4%;
+  transform: translate(-50%, -50%); 
+  /* background-color: rgba(224, 255, 255, 0.97); */
+
+  width: 6%;
+  height: 5.7%;
+}
+
+#LED-\*-on {
+  top: 58%;  
+  left: 49.4%;
+  transform: translate(-50%, -50%);
+  filter: hue-rotate(-20deg);
+
+  width: 6%;
+  height: 5.7%;
+}
+
+#\/.operator-button {
+  position: absolute;
+  top: 64.7%;  
+  left: 49.4%;
+  transform: translate(-50%, -50%); 
+  /* background-color: rgba(224, 255, 255, 0.97); */
+
+  width: 6%;
+  height: 6%;
+}
+
+#LED-\/-on {
+  top: 64.7%;  
+  left: 49.4%;
+  transform: translate(-50%, -50%);
+  filter: hue-rotate(-20deg);
+
+  width: 6%;
+  height: 6%;
 }
 
 .two-displays {
