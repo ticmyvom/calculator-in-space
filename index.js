@@ -14,6 +14,7 @@ const leds = [
     document.getElementById("LED-*-on"),
     document.getElementById("LED-/-on")
 ]
+const modeSwitchBtn = document.querySelector('.mode-switch-button');
 
 function createEnum(values) {
     const enumObject = {};
@@ -337,3 +338,9 @@ const blinkAllLedsTwice = () => {
     blinkAllLeds();
     setTimeout(blinkAllLeds, 400);
 }
+
+modeSwitchBtn.addEventListener('click', () => {
+    // Play button sound 
+    const audio = new Audio("sound/morpher_on.mp3");
+    audio.play();
+});

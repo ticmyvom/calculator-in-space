@@ -219,3 +219,26 @@ body {
   color: white;
   border: none;
 }
+
+.mode-switch-button {
+  position: absolute;
+  top: 80.6%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+
+  width: 4vw;
+  height: 1.2vw;
+  opacity: 0;
+  /* not sure if pointer-events: auto needed */
+  /* pointer-events: auto;  */
+}
+
+#switch-at-X {
+  position: absolute;
+  top: 80.6%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+
+  width: 4.3vw;
+  display: none;
+}
