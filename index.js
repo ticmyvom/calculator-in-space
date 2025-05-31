@@ -95,6 +95,17 @@ acBtn.addEventListener('click', () => {
     setCalculatorState(calcState.init);
     display.textContent = '';
     prevExprs.textContent = '';
+
+    // Also open the morpher if it is closed
+    if (!morpherState.isOpen) {
+        morpher.src = "/img/open_morpher_no_background.png"
+        morpherState.isOpen = true;
+        
+        const audio = new Audio("sound/lid_open.mp3");
+        audio.play();
+
+        enableInterface(true);
+    }
 });
 
 function updateDisplay(content) {
@@ -356,7 +367,16 @@ modeSwitchBtn.addEventListener('click', () => {
 
 const enableInterface = (isEnable) => {
     if (isEnable) {
-        // TODO: do the opposite
+        eqBtn.style.display = "";
+        ceBtn.style.display = "";
+
+        acBtn.style.opacity = 1;
+
+        display.style.display = "";
+        prevExprs.style.display = "";
+
+        for (let numBtn of numBtns) numBtn.style.display = "";
+        for (let opBtn of opBtns) opBtn.style.display = "";
     }
     else {
         eqBtn.style.display = "none";
@@ -373,6 +393,7 @@ const enableInterface = (isEnable) => {
     }
 }
 
+// Close the morpher
 prevExprs.addEventListener('click', () => {
     if (morpherState.isOpen) {
         morpher.src = "/img/closed_morpher_no_background.png"
