@@ -15,6 +15,11 @@ const leds = [
     document.getElementById("LED-/-on")
 ]
 const modeSwitchBtn = document.querySelector('.mode-switch-button');
+const morpher = document.querySelector('#morpher');
+const morpherState = {
+    isOpen: true,
+    mode: 'calculator' // 'calculator' or 'ranger'
+}
 
 function createEnum(values) {
     const enumObject = {};
@@ -289,7 +294,11 @@ function handlingDecimal() {
     // }
 }
 
-document.addEventListener('keydown', getKeyboardSupport);
+document.addEventListener('keydown', (keyboardEvent) => {
+    if (morpherState.isOpen) {
+        getKeyboardSupport(keyboardEvent);
+    }
+});
 
 // AUDIO MUSIC
 musicToggleBtn.addEventListener('click', () => {
@@ -343,4 +352,34 @@ modeSwitchBtn.addEventListener('click', () => {
     // Play button sound 
     const audio = new Audio("sound/morpher_on.mp3");
     audio.play();
+});
+
+const enableInterface = (isEnable) => {
+    if (isEnable) {}
+    else {
+        eqBtn.style.display = "none";
+        ceBtn.style.display = "none";
+        acBtn.style.display = "none";
+        acBtn.style.display = "none";
+
+        display.style.display = "none";
+        prevExprs.style.display = "none";
+
+        for (let numBtn of numBtns) numBtn.style.display = "none";
+        for (let opBtn of opBtns) opBtn.style.display = "none";
+
+        // Need to disable key input too
+    }
+}
+
+prevExprs.addEventListener('click', () => {
+    if (morpherState.isOpen) {
+        morpher.src = "/img/closed_morpher_no_background.png"
+        morpherState.isOpen = false;
+        
+        const audio = new Audio("sound/lid_close.mp3");
+        audio.play();
+
+        enableInterface(false);
+    }
 });
