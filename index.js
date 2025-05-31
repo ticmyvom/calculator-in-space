@@ -355,20 +355,21 @@ modeSwitchBtn.addEventListener('click', () => {
 });
 
 const enableInterface = (isEnable) => {
-    if (isEnable) {}
+    if (isEnable) {
+        // TODO: do the opposite
+    }
     else {
         eqBtn.style.display = "none";
         ceBtn.style.display = "none";
-        acBtn.style.display = "none";
-        acBtn.style.display = "none";
+
+        // Hide the acBtn but still clickable to open the morpher
+        acBtn.style.opacity = 0;
 
         display.style.display = "none";
         prevExprs.style.display = "none";
 
         for (let numBtn of numBtns) numBtn.style.display = "none";
         for (let opBtn of opBtns) opBtn.style.display = "none";
-
-        // Need to disable key input too
     }
 }
 
