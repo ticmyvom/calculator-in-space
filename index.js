@@ -396,7 +396,8 @@ const enableInterface = (isEnable) => {
 // Close the morpher
 prevExprs.addEventListener('click', () => {
     if (morpherState.isOpen) {
-        morpher.src = "/img/closed_morpher_no_background.png"
+        // Minor bug: the first time we close the morpher, the transition doesn't look very smooth
+        morpher.src = "/img/closed_morpher_no_background.png";
         morpherState.isOpen = false;
         
         const audio = new Audio("sound/lid_close.mp3");
