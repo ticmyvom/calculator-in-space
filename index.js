@@ -419,20 +419,20 @@ prevExprs.addEventListener('click', () => {
 
 // Toggle between modes and update UI as needed
 modeSwitchBtn.addEventListener('click', () => {
-    if (morpherState.isOpen) enableFullUI(morpherState.mode);
-
     morpherState.mode = (morpherState.mode == 'ranger') ? 'calculator' : 'ranger';
     
     if (morpherState.mode === 'ranger') {
         const audio = new Audio("sound/morpher_on.mp3");
         audio.play();
-
+        
         switchAtXImg.style.opacity = 1;
     } else if (morpherState.mode === 'calculator') {
         const audio = new Audio("sound/physical_switch.mp3");
         audio.play();
-
+        
         switchAtXImg.style.opacity = 0;
     }
+
+    if (morpherState.isOpen) enableFullUI(morpherState.mode);
 })
 
