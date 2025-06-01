@@ -15,6 +15,7 @@ const leds = [
     document.getElementById("LED-/-on")
 ]
 const modeSwitchBtn = document.querySelector('.mode-switch-button');
+const switchAtXImg = document.querySelector('#switch-at-X');
 const morpher = document.querySelector('#morpher');
 const morpherState = {
     isOpen: true,
@@ -92,19 +93,20 @@ acBtn.addEventListener('click', () => {
     const audio = new Audio("sound/lid_open.mp3");
     audio.play();
 
-    setCalculatorState(calcState.init);
-    display.textContent = '';
-    prevExprs.textContent = '';
+    if (morpherState.mode === 'calculator') {
+        setCalculatorState(calcState.init);
+        display.textContent = '';
+        prevExprs.textContent = '';
+    }
 
     // Also open the morpher if it is closed
     if (!morpherState.isOpen) {
         morpher.src = "/img/open_morpher_no_background.png"
         morpherState.isOpen = true;
         
-        const audio = new Audio("sound/lid_open.mp3");
-        audio.play();
+        enableFullUI(morpherState.mode);
 
-        enableInterface(true);
+        // TODO: if the morpher is in 'ranger' mode, play a random let's rocket sound
     }
 });
 
@@ -203,9 +205,6 @@ eqBtn.addEventListener('click', () => {
 
     calculate();
 });
-
-// TODO: round off numbers if they're too long. Do it after determine the size of the calculator during CSS
-// TODO: - Fix: when calculating, if the first character is 0, remove it
 
 function calculate() {
     if (getCalculatorState() === calcState.init ||
@@ -306,7 +305,7 @@ function handlingDecimal() {
 }
 
 document.addEventListener('keydown', (keyboardEvent) => {
-    if (morpherState.isOpen) {
+    if (morpherState.isOpen && morpherState.mode === 'calculator') {
         getKeyboardSupport(keyboardEvent);
     }
 });
@@ -359,39 +358,50 @@ const blinkAllLedsTwice = () => {
     setTimeout(blinkAllLeds, 400);
 }
 
-modeSwitchBtn.addEventListener('click', () => {
-    // Play button sound 
-    const audio = new Audio("sound/morpher_on.mp3");
-    audio.play();
-});
+// Partial UI when the morpher is closed. Only AC and modeSwitch are clickable
+const enablePartialUI = (isEnable) => {
+    eqBtn.style.display = "none";
+    ceBtn.style.display = "none";
 
-const enableInterface = (isEnable) => {
-    if (isEnable) {
+    // Hidden, but clickable
+    acBtn.style.display = ""
+    acBtn.style.opacity = 0;
+    prevExprs.style.opacity = 0;
+
+    display.style.display = "none";
+
+    for (let numBtn of numBtns) numBtn.style.display = "none";
+    for (let opBtn of opBtns) opBtn.style.display = "none";
+}
+
+// Full UI when the morpher is open
+const enableFullUI = (mode) => {
+    if (mode === 'ranger') {
         eqBtn.style.display = "";
         ceBtn.style.display = "";
 
+        acBtn.style.display = "none"; // not clickable
+
+        display.style.display = "none"; // hidden, not clickable
+        prevExprs.style.opacity = 0;    // hidden, clickable
+
+        for (let numBtn of numBtns) numBtn.style.display = "";
+        for (let opBtn of opBtns) opBtn.style.display = "none";
+    } else if (mode === 'calculator') {
+        eqBtn.style.display = "";
+        ceBtn.style.display = "";
+
+        acBtn.style.display = "";
         acBtn.style.opacity = 1;
 
         display.style.display = "";
-        prevExprs.style.display = "";
+        prevExprs.style.opacity = 1;
 
         for (let numBtn of numBtns) numBtn.style.display = "";
         for (let opBtn of opBtns) opBtn.style.display = "";
     }
-    else {
-        eqBtn.style.display = "none";
-        ceBtn.style.display = "none";
-
-        // Hide the acBtn but still clickable to open the morpher
-        acBtn.style.opacity = 0;
-
-        display.style.display = "none";
-        prevExprs.style.display = "none";
-
-        for (let numBtn of numBtns) numBtn.style.display = "none";
-        for (let opBtn of opBtns) opBtn.style.display = "none";
-    }
 }
+
 
 // Close the morpher
 prevExprs.addEventListener('click', () => {
@@ -403,6 +413,26 @@ prevExprs.addEventListener('click', () => {
         const audio = new Audio("sound/lid_close.mp3");
         audio.play();
 
-        enableInterface(false);
+        enablePartialUI();
     }
 });
+
+// Toggle between modes and update UI as needed
+modeSwitchBtn.addEventListener('click', () => {
+    if (morpherState.isOpen) enableFullUI(morpherState.mode);
+
+    morpherState.mode = (morpherState.mode == 'ranger') ? 'calculator' : 'ranger';
+    
+    if (morpherState.mode === 'ranger') {
+        const audio = new Audio("sound/morpher_on.mp3");
+        audio.play();
+
+        switchAtXImg.style.opacity = 1;
+    } else if (morpherState.mode === 'calculator') {
+        const audio = new Audio("sound/physical_switch.mp3");
+        audio.play();
+
+        switchAtXImg.style.opacity = 0;
+    }
+})
+
