@@ -372,12 +372,12 @@ const blinkAllLeds = () => {
         for (let i = 0; i < leds.length; i++) {
             turnLedOff(i);
         }
-    }, 200);
+    }, 340);
 }
 
 const blinkAllLedsTwice = () => {
     blinkAllLeds();
-    setTimeout(blinkAllLeds, 400);
+    setTimeout(blinkAllLeds, 500);
 }
 
 // time in ms
@@ -482,6 +482,7 @@ modeSwitchBtn.addEventListener('click', () => {
     if (morpherState.mode === 'ranger') {
         const audio = new Audio("sound/morpher_on.mp3");
         audio.play();
+        blinkAllLeds();
         
         switchAtXImg.style.opacity = 1;
     } else if (morpherState.mode === 'calculator') {
