@@ -21,6 +21,7 @@ const morpherState = {
     isOpen: true,
     mode: 'calculator' // 'calculator' or 'ranger'
 }
+let codeInput = "";
 
 function createEnum(values) {
     const enumObject = {};
@@ -123,16 +124,20 @@ numBtns.forEach((numBtn) => {
         const numberAudio = new Audio(`sound/${numBtn.textContent}.mp3`);
         numberAudio.play();
 
-        if (getCalculatorState() === calcState.op){
-            setCalculatorState(calcState.num2);
-            updateDisplay(numBtn.textContent);
-            return;
-        }
+        if (morpherState.mode === 'calculator') {
+            if (getCalculatorState() === calcState.op){
+                setCalculatorState(calcState.num2);
+                updateDisplay(numBtn.textContent);
+                return;
+            }
 
-        if  (getCalculatorState() === calcState.init){
-            setCalculatorState(calcState.num1);
+            if  (getCalculatorState() === calcState.init){
+                setCalculatorState(calcState.num1);
+            }
+            updateDisplay(numBtn.textContent);
+        } else if (morpherState.mode === 'ranger') {
+            codeInput += numBtn.textContent;
         }
-        updateDisplay(numBtn.textContent);
 
     });
 });
@@ -196,14 +201,31 @@ opBtns.forEach((opBtn) => {
 });
 
 eqBtn.addEventListener('click', () => {
-    // Play button sound 
-    const audio = new Audio("sound/Enter.mp3");
-    audio.volume = 0.5;
-    audio.play();
+    if (morpherState.mode === 'calculator') {
+        // Play button sound 
+        const audio = new Audio("sound/Enter.mp3");
+        audio.volume = 0.5;
+        audio.play();
 
-    blinkAllLedsTwice();
+        blinkAllLedsTwice();
+        calculate();
+    } else if (morpherState.mode === 'ranger') {
+        switch (codeInput) {
+            case "335":
+                display335();
+                break;
+            default:
+                // Unidentified code was entered, play the generic sound and effect
+                const audio = new Audio("sound/Enter.mp3");
+                audio.volume = 0.5;
+                audio.play();
 
-    calculate();
+                blinkAllLedsTwice();
+        }
+        // console.log(codeInput);
+        codeInput = "";
+        // console.log(codeInput);
+    }
 });
 
 function calculate() {
@@ -358,6 +380,43 @@ const blinkAllLedsTwice = () => {
     setTimeout(blinkAllLeds, 400);
 }
 
+// time in ms
+const keepLedOnForSometime = (ledIndex, delay) => {
+    turnLedOn(ledIndex);
+    setTimeout(turnLedOff, delay, ledIndex);
+}
+
+const display335 = () => {
+    const blink0213 = () => {
+        keepLedOnForSometime(0, 200);
+        keepLedOnForSometime(2, 200);
+
+        setTimeout(keepLedOnForSometime, 200, 1, 200);
+        setTimeout(keepLedOnForSometime, 200, 3, 200);
+    }
+    // TODO: randomize 335 tracks
+    // const audio = new Audio("sound/335_blueranger.mp3");
+    const audio = new Audio("sound/335_toy.mp3");
+    audio.play();
+
+    // LED sequence 1
+    keepLedOnForSometime(3, 1200);
+    setTimeout(keepLedOnForSometime, 400, 2, 1200);
+    setTimeout(keepLedOnForSometime, 800, 1, 1200);
+    setTimeout(keepLedOnForSometime, 1200, 0, 1200);
+
+    // LED sequence 2
+    setTimeout(blink0213, 2800);
+    setTimeout(blink0213, 3200);
+    setTimeout(blink0213, 3600);
+    setTimeout(blink0213, 4000);
+    setTimeout(blink0213, 4400);
+    setTimeout(blink0213, 4800);
+    setTimeout(blink0213, 5200);
+    setTimeout(blink0213, 5600);
+    setTimeout(blink0213, 6000);
+}
+
 // Partial UI when the morpher is closed. Only AC and modeSwitch are clickable
 const enablePartialUI = (isEnable) => {
     eqBtn.style.display = "none";
@@ -401,7 +460,6 @@ const enableFullUI = (mode) => {
         for (let opBtn of opBtns) opBtn.style.display = "";
     }
 }
-
 
 // Close the morpher
 prevExprs.addEventListener('click', () => {
