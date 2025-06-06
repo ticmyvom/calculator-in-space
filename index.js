@@ -362,8 +362,8 @@ const turnLedOff = (ledIndex) => {
     leds[ledIndex].classList.remove("led-on");
 }
 
-// turnLedOff(2);
-const blinkAllLeds = () => {
+// flash all the leds for a given time period
+const blinkAllLeds = (time = 340) => {
     for (let i = 0; i < leds.length; i++) {
         turnLedOn(i);
     }
@@ -372,7 +372,7 @@ const blinkAllLeds = () => {
         for (let i = 0; i < leds.length; i++) {
             turnLedOff(i);
         }
-    }, 340);
+    }, time);
 }
 
 const blinkAllLedsTwice = () => {
@@ -387,13 +387,16 @@ const keepLedOnForSometime = (ledIndex, delay) => {
 }
 
 const display335 = () => {
-    const blink0213 = () => {
-        keepLedOnForSometime(0, 200);
-        keepLedOnForSometime(2, 200);
+    const time = 200;
 
-        setTimeout(keepLedOnForSometime, 200, 1, 200);
-        setTimeout(keepLedOnForSometime, 200, 3, 200);
+    const blink0213 = () => {
+        keepLedOnForSometime(0, time);
+        keepLedOnForSometime(2, time);
+
+        setTimeout(keepLedOnForSometime, time, 1, time);
+        setTimeout(keepLedOnForSometime, time, 3, time);
     }
+
     // TODO: randomize 335 tracks
     // const audio = new Audio("sound/335_blueranger.mp3");
     const audio = new Audio("sound/335_toy.mp3");
@@ -414,7 +417,7 @@ const display335 = () => {
     setTimeout(blink0213, 4800);
     setTimeout(blink0213, 5200);
     setTimeout(blink0213, 5600);
-    setTimeout(blink0213, 6000);
+    setTimeout(blinkAllLeds, 6005, time);
 }
 
 // Partial UI when the morpher is closed. Only AC and modeSwitch are clickable
@@ -483,12 +486,10 @@ modeSwitchBtn.addEventListener('click', () => {
         const audio = new Audio("sound/morpher_on.mp3");
         audio.play();
         blinkAllLeds();
-        
         switchAtXImg.style.opacity = 1;
     } else if (morpherState.mode === 'calculator') {
         const audio = new Audio("sound/physical_switch.mp3");
         audio.play();
-        
         switchAtXImg.style.opacity = 0;
     }
 
