@@ -80,13 +80,28 @@ function operate(operator, num1, num2) {
         }
 }
 
+let loopSoundTimerId = 0;
+let loopCommLedsTimerId = 0;
 ceBtn.addEventListener('click', () => {
-    // Play button sound 
-    const audio = new Audio("sound/communicating.mp3");
-    audio.play();
+    let audio = new Audio("sound/communicating.mp3");
 
-    setCalculatorState(calcState.init);
-    display.textContent = '';
+    if (morpherState.mode === 'calculator') {
+        audio.play();
+        setCalculatorState(calcState.init);
+        display.textContent = '';
+    } else if (morpherState.mode === 'ranger') {
+        let audioLength = 700; // how long communating.mp3 is
+        loopSoundTimerId = setTimeout(function loopSound() {
+            audio.play();
+            loopSoundTimerId = setTimeout(loopSound, audioLength); 
+        }, 5);
+
+        let ledsEffectLength = 3000;
+        loopCommLedsTimerId = setTimeout(function loopCommLeds() {
+            displayCommunicating();
+            loopCommLedsTimerId = setTimeout(loopCommLeds, ledsEffectLength);
+        }, 5);
+    }
 });
 
 acBtn.addEventListener('click', () => {
@@ -210,6 +225,11 @@ eqBtn.addEventListener('click', () => {
         blinkAllLedsTwice();
         calculate();
     } else if (morpherState.mode === 'ranger') {
+        if (loopSoundTimerId != 0) {
+            disableCommunicating();
+            return;
+        }
+
         switch (codeInput) {
             case "335":
                 display335();
@@ -222,9 +242,7 @@ eqBtn.addEventListener('click', () => {
 
                 blinkAllLedsTwice();
         }
-        // console.log(codeInput);
         codeInput = "";
-        // console.log(codeInput);
     }
 });
 
@@ -386,6 +404,51 @@ const keepLedOnForSometime = (ledIndex, delay) => {
     setTimeout(turnLedOff, delay, ledIndex);
 }
 
+const displayLeds = (pattern) => {
+    for (let i = 0; i < pattern.length; i++) {
+        if (pattern[i] === 0) {
+            turnLedOff(i);
+        } else {
+            turnLedOn(i);
+        }
+    }
+}
+
+let displayCommunicatingTimerId = [];
+const displayCommunicating = () => {
+    let cycleTime = 500;
+    let ledPatterns = [
+        [0,1,1,1], 
+        [1,0,1,1], 
+        [1,1,0,1], 
+        [1,1,1,0], 
+        [1,1,0,1], 
+        [1,0,1,1], 
+        [0,1,1,1]
+    ];
+
+    // Clear any previous timeouts
+    displayCommunicatingTimerId.forEach(clearTimeout);
+    displayCommunicatingTimerId = []
+
+    ledPatterns.forEach((pattern, index) => {
+        const timerId = setTimeout(displayLeds, index * cycleTime, pattern);
+        displayCommunicatingTimerId.push(timerId);
+    })
+}
+
+const disableCommunicating = () => {
+    // Cancel communicating sound when Enter button is clicked
+    clearTimeout(loopSoundTimerId);
+    clearTimeout(loopCommLedsTimerId);
+    displayCommunicatingTimerId.forEach(clearTimeout);
+
+    loopSoundTimerId = 0;
+    loopCommLedsTimerId = 0;
+    displayCommunicatingTimerId = []
+    displayLeds([0,0,0,0]); // turn off all leds
+}
+
 const display335 = () => {
     const time = 200;
 
@@ -481,6 +544,7 @@ prevExprs.addEventListener('click', () => {
 // Toggle between modes and update UI as needed
 modeSwitchBtn.addEventListener('click', () => {
     morpherState.mode = (morpherState.mode == 'ranger') ? 'calculator' : 'ranger';
+    disableCommunicating();
     
     if (morpherState.mode === 'ranger') {
         const audio = new Audio("sound/morpher_on.mp3");
