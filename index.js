@@ -243,6 +243,9 @@ eqBtn.addEventListener('click', () => {
             case "108":
                 display108();
                 break;
+            case "541":
+                display541();
+                break;
             default:
                 // Unidentified code was entered, play the generic sound and effect
                 const audio = new Audio("sound/Enter.mp3");
@@ -557,6 +560,35 @@ const display108 = () => {
         [0,0,1,1], 
         [1,1,1,0],
         [0,1,0,1],
+        [0,0,0,0],
+    ];
+
+    ledPatterns.forEach((pattern, index) => {
+        setTimeout(displayLeds, index * cycleTime, pattern);
+    })
+}
+
+const display541 = () => {
+    const audio = new Audio("sound/541.mp3");
+    audio.play();
+
+    let cycleTime = 160;
+    let ledPatterns = [
+        [0,1,1,1], 
+        [0,0,1,1], 
+        [0,0,0,1], 
+        [0,0,0,0],
+        [0,0,0,1], 
+        [0,0,1,1],
+        [0,1,1,1],
+        [0,0,1,1],
+        [0,1,1,1], 
+        [1,1,1,1], 
+        [0,0,0,0], 
+        [1,1,1,1],
+        [0,1,1,1], 
+        [0,0,1,1],
+        [0,0,0,1],
         [0,0,0,0],
     ];
 
