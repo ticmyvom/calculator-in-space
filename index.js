@@ -234,6 +234,9 @@ eqBtn.addEventListener('click', () => {
             case "335":
                 display335();
                 break;
+            case "259":
+                display259();
+                break;
             default:
                 // Unidentified code was entered, play the generic sound and effect
                 const audio = new Audio("sound/Enter.mp3");
@@ -481,6 +484,27 @@ const display335 = () => {
     setTimeout(blink0213, 5200);
     setTimeout(blink0213, 5600);
     setTimeout(blinkAllLeds, 6005, time);
+}
+
+const display259 = () => {
+    const audio = new Audio("sound/259.mp3");
+    audio.play();
+
+    let cycleTime = 250;
+    let ledPatterns = [
+        [0,1,1,0], 
+        [1,0,0,1], 
+        [1,1,1,1], 
+        [0,0,0,0], 
+        [1,1,1,1], 
+        [0,0,0,0], 
+        [1,1,1,1], 
+        [0,0,0,0],
+    ];
+
+    ledPatterns.forEach((pattern, index) => {
+        setTimeout(displayLeds, index * cycleTime, pattern);
+    })
 }
 
 // Partial UI when the morpher is closed. Only AC and modeSwitch are clickable
