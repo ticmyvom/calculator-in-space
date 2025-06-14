@@ -529,13 +529,17 @@ const display761 = () => {
     const audio = new Audio("sound/761.mp3");
     audio.play();
 
-    let cycleTime = 240;
+    let cycleTime = 162 ;
     let ledPatterns = [
         [0,1,1,0], 
         [1,0,0,1], 
         [0,1,1,0], 
         [1,0,0,1],
         [0,1,1,0], 
+        [1,0,0,1],
+        [0,1,1,0],
+        [1,0,0,1],
+        [0,1,1,0],
         [1,0,0,1],
         [0,1,1,0],
         [1,0,0,1],
