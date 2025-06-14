@@ -32,6 +32,21 @@ const letRocketSounds = [
     "sound/letsrocket_clearsound.mp3", 
     "sound/letsrocket_together.mp3",
 ];
+const morphSounds = [
+    "sound/335_toy.mp3",
+    "sound/335_toy.mp3",
+    "sound/335_toy.mp3",
+    "sound/335_toy.mp3",
+    "sound/335_toy.mp3", 
+    "sound/335_toy.mp3",
+    "sound/335_1.mp3",
+    "sound/335_2.mp3",
+    "sound/335_blueranger.mp3",
+    "sound/335_long.mp3",
+    "sound/335_longest.mp3", 
+    "sound/335_powerranger.mp3",
+    "sound/335_powerranger.mp3",
+];
 
 function createEnum(values) {
     const enumObject = {};
@@ -493,9 +508,9 @@ const display335 = () => {
         setTimeout(keepLedOnForSometime, time, 3, time);
     }
 
-    // TODO: randomize 335 tracks
-    // const audio = new Audio("sound/335_blueranger.mp3");
-    const audio = new Audio("sound/335_toy.mp3");
+    // randomize 335 tracks
+    const soundIndex = getRandomInt(morphSounds.length);
+    audio = new Audio(morphSounds[soundIndex]);
     audio.play();
 
     // LED sequence 1
