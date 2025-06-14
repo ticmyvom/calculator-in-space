@@ -13,7 +13,7 @@ const leds = [
     document.getElementById("LED---on"),
     document.getElementById("LED-*-on"),
     document.getElementById("LED-/-on")
-]
+];
 const modeSwitchBtn = document.querySelector('.mode-switch-button');
 const switchAtXImg = document.querySelector('#switch-at-X');
 const morpher = document.querySelector('#morpher');
@@ -23,6 +23,15 @@ const morpherState = {
     playingMinigame912: false
 }
 let codeInput = "";
+// note that the clearsound version has more chance of occuring
+const letRocketSounds = [
+    "sound/letsrocket.mp3",
+    "sound/letsrocket_2.mp3",
+    "sound/letsrocket_clearsound.mp3",
+    "sound/letsrocket_clearsound.mp3",
+    "sound/letsrocket_clearsound.mp3", 
+    "sound/letsrocket_together.mp3",
+];
 
 function createEnum(values) {
     const enumObject = {};
@@ -106,7 +115,7 @@ ceBtn.addEventListener('click', () => {
 
 acBtn.addEventListener('click', () => {
     // Play button sound 
-    const audio = new Audio("sound/lid_open.mp3");
+    let audio = new Audio("sound/lid_open.mp3");
     audio.play();
 
     if (morpherState.mode === 'calculator') {
@@ -122,7 +131,10 @@ acBtn.addEventListener('click', () => {
         
         enableFullUI(morpherState.mode);
 
-        // TODO: if the morpher is in 'ranger' mode, play a random let's rocket sound
+        // play a random "let's rocket" sound when opening the morpher during ranger mode
+        const soundIndex = getRandomInt(letRocketSounds.length)
+        audio = new Audio(letRocketSounds[soundIndex]);
+        audio.play();
     }
 });
 
