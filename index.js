@@ -308,7 +308,7 @@ function calculate() {
     input = input.replace(/\s+/g, '');
     // console.log('before parsing: ', input);
     
-    const validExpression = /^(?<num1>-?[\d]+(\.?[\d]+)*)(?<operator>[+\-×÷])(?<num2>-?[\d]+(\.?[\d]+)*)$/;
+    const validExpression = /^(?<num1>-?[\d]+(\.?[\d]+)*)(?<operator>[+\-×÷])(?<num2>[+-]?[\d]+(\.?[\d]+)*)$/;
     // console.log(input);
     // console.log(input.match(validExpression).groups);
     let parsedInput = input.match(validExpression).groups;
