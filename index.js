@@ -486,7 +486,7 @@ const displayCommunicating = () => {
 }
 
 const disableCommunicating = () => {
-    // Cancel communicating sound when Enter button is clicked
+    // Cancel communicating sound when Enter button is clicked or when switching mode
     clearTimeout(loopSoundTimerId);
     clearTimeout(loopCommLedsTimerId);
     displayCommunicatingTimerId.forEach(clearTimeout);
