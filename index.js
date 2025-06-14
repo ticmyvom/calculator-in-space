@@ -832,11 +832,11 @@ modeSwitchBtn.addEventListener('click', () => {
         const audio = new Audio("sound/morpher_on.mp3");
         audio.play();
         blinkAllLeds();
-        switchAtXImg.style.opacity = 1;
+        switchAtXImg.style.opacity = 0;
     } else if (morpherState.mode === 'calculator') {
         const audio = new Audio("sound/physical_switch.mp3");
         audio.play();
-        switchAtXImg.style.opacity = 0;
+        switchAtXImg.style.opacity = 1;
     }
 
     if (morpherState.isOpen) enableFullUI(morpherState.mode);

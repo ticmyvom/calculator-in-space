@@ -241,6 +241,6 @@ body {
   transform: translate(-50%, -50%);
 
   width: 4.3vw;
-  opacity: 0;
+  opacity: 1;
   z-index: 1;
 }
