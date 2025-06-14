@@ -306,17 +306,26 @@ function calculate() {
     let input = display.textContent;
     let expression = display.textContent;
     input = input.replace(/\s+/g, '');
-    // console.log('before parsing: ', input);
     
+    // currently won't work with really big number like -6.666666600000001e+27 but that's fine
     const validExpression = /^(?<num1>-?[\d]+(\.?[\d]+)*)(?<operator>[+\-×÷])(?<num2>[+-]?[\d]+(\.?[\d]+)*)$/;
-    // console.log(input);
-    // console.log(input.match(validExpression).groups);
-    let parsedInput = input.match(validExpression).groups;
+    let parsedInput;
+    try {
+        parsedInput = input.match(validExpression).groups;
+    } catch (e)  {
+        if (e instanceof TypeError) {
+            alert("Oops! This calculator is not compatible with the scientific notation at the moment.");
+            ceBtn.click(); // to clear the current expression display
+            return;
+        } else {
+            alert(`Something else is wrong:\n${e}`)
+        }
+    }
+
     let num1 = parsedInput.num1,
         num2 = parsedInput.num2,
         operator = parsedInput.operator;
 
-    // console.log(input);
     num1 = parseFloat(num1)
     num2 = parseFloat(num2);
     
