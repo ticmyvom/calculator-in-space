@@ -19,7 +19,8 @@ const switchAtXImg = document.querySelector('#switch-at-X');
 const morpher = document.querySelector('#morpher');
 const morpherState = {
     isOpen: true,
-    mode: 'calculator' // 'calculator' or 'ranger'
+    mode: 'calculator', // 'calculator' or 'ranger'
+    playingMinigame912: false
 }
 let codeInput = "";
 
@@ -65,7 +66,6 @@ function divide(n1, n2) {
 }
 
 function operate(operator, num1, num2) {
-    // console.log('operating', num1, operator, num2);
     switch (operator) {
         case "+":
             return add(num1, num2);
@@ -130,14 +130,20 @@ function updateDisplay(content) {
     display.textContent += content;
 }
 
+// Play button sound 
+const annouceNumber = (number) => {
+    const audio = new Audio(`sound/${number}.mp3`);
+    audio.play();
+}
+
 numBtns.forEach((numBtn) => {
     numBtn.addEventListener('click', () => {
         // console.log(getCalculatorState());
         // console.log(`clicked ${numBtn.textContent} `);
 
-        // Play button sound 
-        const numberAudio = new Audio(`sound/${numBtn.textContent}.mp3`);
-        numberAudio.play();
+        if (morpherState.playingMinigame912 === false) {
+            annouceNumber(numBtn.textContent);
+        }
 
         if (morpherState.mode === 'calculator') {
             if (getCalculatorState() === calcState.op){
@@ -245,6 +251,9 @@ eqBtn.addEventListener('click', () => {
                 break;
             case "541":
                 display541();
+                break;
+            case "912":
+                playMinigame912();
                 break;
             default:
                 // Unidentified code was entered, play the generic sound and effect
@@ -595,6 +604,134 @@ const display541 = () => {
     ledPatterns.forEach((pattern, index) => {
         setTimeout(displayLeds, index * cycleTime, pattern);
     })
+}
+
+function getRandomInt(exclusiveMax = 10) {
+  return Math.floor(Math.random() * exclusiveMax);
+}
+
+async function playMinigame912() {
+    morpherState.playingMinigame912 = true;
+
+    const displayLives = (lives) => {
+        switch (lives) {
+            case 4:
+                displayLeds([1,1,1,1]);
+                break;
+            case 3:
+                displayLeds([0,1,1,1]);
+                break;
+            case 2:
+                displayLeds([0,0,1,1]);
+                break;
+            case 1:
+                displayLeds([0,0,0,1]);
+                break;
+            case 0:
+                displayLeds([0,0,0,0]);
+                break;
+            default:
+                return;
+        }
+    }
+
+    async function getUserAnswer(timeout = 2000) {
+        return new Promise((resolve) => {
+            let answered = false;
+
+            const handleClick912 = (event) => {
+                // because our number buttons has id=${number}
+                const value = event.target.id;
+                if (value >= 0 && value <= 9) { 
+                    answered = true;
+                    cleanup();
+                    resolve(Number(value));
+                } else {
+                    cleanup();
+                    resolve(-1);
+                }
+            };
+
+            const cleanup = () => {
+                clearTimeout(timer);
+                numBtns.forEach(btn => btn.removeEventListener('click', handleClick912));
+            }
+
+            numBtns.forEach(btn => btn.addEventListener('click', handleClick912));
+            const timer = setTimeout(() => {
+                if (!answered) {
+                    cleanup();
+                    resolve(-1);
+                }
+            }, timeout);
+        });
+    }
+
+    const determineTimeout = () => {
+        if (scores > 5) return 1750;
+        if (scores > 10) return 1500;
+        if (scores > 15) return 1250;
+        if (scores > 20) return 1000;
+        return 2000;
+    }
+
+    let audio = new Audio("sound/912_minigame.mp3");
+    audio.play();
+    
+    let scores = 0;
+    let lives = 4;
+    displayLives(lives);
+    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    while (lives > 0) {
+        // Call out a random number from 0-9
+        const randomNumber = getRandomInt(10);
+        annouceNumber(randomNumber);
+
+        const answer = await getUserAnswer(timeout = determineTimeout());
+        
+        if (answer === randomNumber) {
+            audio = new Audio("sound/correct_minigame.mp3");
+            audio.play();
+            scores++;
+        } else {
+            lives--;
+            displayLives(lives);
+            audio = new Audio("sound/incorrect_lostalife_minigame.mp3");
+            audio.play();
+        }
+
+        // wait 1000ms before starting the next round
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+
+    // play sound and effect when the game ends
+    audio = new Audio("sound/end_minigame.mp3");
+    audio.play();
+
+    let cycleTime = 325;
+    let ledPatterns = [
+        [0,0,0,0],
+        [1,1,1,1], 
+        [0,0,0,0],
+    ];
+    ledPatterns.forEach((pattern, index) => {
+        setTimeout(displayLeds, index * cycleTime, pattern);
+    })
+    
+    // wait a bit
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+
+    // announce scores by digit
+    let scoresList = scores.toString().split('').map(Number);
+    for (const digit of scoresList) {
+        annouceNumber(digit);
+        await new Promise((resolve) => setTimeout(resolve, 850));
+    }
+
+    // clean up
+    morpherState.playingMinigame912 = false; 
 }
 
 // Partial UI when the morpher is closed. Only AC and modeSwitch are clickable
