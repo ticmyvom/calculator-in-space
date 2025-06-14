@@ -396,6 +396,12 @@ function handlingDecimal() {
 
 document.addEventListener('keydown', (keyboardEvent) => {
     if (morpherState.isOpen && morpherState.mode === 'calculator') {
+        if (keyboardEvent.key === 'Enter') {
+            // pressing Enter should perform its job, rather than its default action:
+            // clicking the focused button
+            keyboardEvent.preventDefault();  
+        }
+        
         getKeyboardSupport(keyboardEvent);
     }
 });
