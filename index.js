@@ -147,9 +147,11 @@ acBtn.addEventListener('click', () => {
         enableFullUI(morpherState.mode);
 
         // play a random "let's rocket" sound when opening the morpher during ranger mode
-        const soundIndex = getRandomInt(letRocketSounds.length)
-        audio = new Audio(letRocketSounds[soundIndex]);
-        audio.play();
+        if (morpherState.mode === 'ranger') {
+            const soundIndex = getRandomInt(letRocketSounds.length)
+            audio = new Audio(letRocketSounds[soundIndex]);
+            audio.play();
+        }
     }
 });
 
@@ -251,11 +253,11 @@ opBtns.forEach((opBtn) => {
 eqBtn.addEventListener('click', () => {
     if (morpherState.mode === 'calculator') {
         // Play button sound 
-        const audio = new Audio("sound/Enter.mp3");
+        const audio = new Audio("sound/Enter_1time.mp3");
         audio.volume = 0.5;
         audio.play();
 
-        blinkAllLedsTwice();
+        blinkAllLeds();
         calculate();
     } else if (morpherState.mode === 'ranger') {
         if (loopSoundTimerId != 0) {
