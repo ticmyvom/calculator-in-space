@@ -244,3 +244,15 @@ body {
   opacity: 1;
   z-index: 1;
 }
+
+* {
+  /* remove the backdrop when clicking on any element using iPhone */
+  -webkit-tap-highlight-color: transparent;
+}
+
+div,
+img,
+button {
+  /* prevent double-click on most elements */
+  touch-action: manipulation; 
+}
