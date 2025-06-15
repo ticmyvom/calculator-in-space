@@ -25,27 +25,27 @@ const morpherState = {
 let codeInput = "";
 // note that the clearsound version has more chance of occuring
 const letRocketSounds = [
-    "sound/letsrocket.mp3",
-    "sound/letsrocket_2.mp3",
-    "sound/letsrocket_clearsound.mp3",
-    "sound/letsrocket_clearsound.mp3",
-    "sound/letsrocket_clearsound.mp3", 
-    "sound/letsrocket_together.mp3",
+    "./sound/letsrocket.mp3",
+    "./sound/letsrocket_2.mp3",
+    "./sound/letsrocket_clearsound.mp3",
+    "./sound/letsrocket_clearsound.mp3",
+    "./sound/letsrocket_clearsound.mp3", 
+    "./sound/letsrocket_together.mp3",
 ];
 const morphSounds = [
-    "sound/335_toy.mp3",
-    "sound/335_toy.mp3",
-    "sound/335_toy.mp3",
-    "sound/335_toy.mp3",
-    "sound/335_toy.mp3", 
-    "sound/335_toy.mp3",
-    "sound/335_1.mp3",
-    "sound/335_2.mp3",
-    "sound/335_blueranger.mp3",
-    "sound/335_long.mp3",
-    "sound/335_longest.mp3", 
-    "sound/335_powerranger.mp3",
-    "sound/335_powerranger.mp3",
+    "./sound/335_toy.mp3",
+    "./sound/335_toy.mp3",
+    "./sound/335_toy.mp3",
+    "./sound/335_toy.mp3",
+    "./sound/335_toy.mp3", 
+    "./sound/335_toy.mp3",
+    "./sound/335_1.mp3",
+    "./sound/335_2.mp3",
+    "./sound/335_blueranger.mp3",
+    "./sound/335_long.mp3",
+    "./sound/335_longest.mp3", 
+    "./sound/335_powerranger.mp3",
+    "./sound/335_powerranger.mp3",
 ];
 
 function createEnum(values) {
@@ -107,7 +107,7 @@ function operate(operator, num1, num2) {
 let loopSoundTimerId = 0;
 let loopCommLedsTimerId = 0;
 ceBtn.addEventListener('click', () => {
-    let audio = new Audio("sound/communicating.mp3");
+    let audio = new Audio("./sound/communicating.mp3");
 
     if (morpherState.mode === 'calculator') {
         audio.play();
@@ -130,7 +130,7 @@ ceBtn.addEventListener('click', () => {
 
 acBtn.addEventListener('click', () => {
     // Play button sound 
-    let audio = new Audio("sound/lid_open.mp3");
+    let audio = new Audio("./sound/lid_open.mp3");
     audio.play();
 
     if (morpherState.mode === 'calculator') {
@@ -141,7 +141,7 @@ acBtn.addEventListener('click', () => {
 
     // Also open the morpher if it is closed
     if (!morpherState.isOpen) {
-        morpher.src = "/img/open_morpher_no_background.png"
+        morpher.src = "./img/open_morpher_no_background.png"
         morpherState.isOpen = true;
         
         enableFullUI(morpherState.mode);
@@ -161,7 +161,7 @@ function updateDisplay(content) {
 
 // Play button sound 
 const annouceNumber = (number) => {
-    const audio = new Audio(`sound/${number}.mp3`);
+    const audio = new Audio(`./sound/${number}.mp3`);
     audio.play();
 }
 
@@ -253,7 +253,7 @@ opBtns.forEach((opBtn) => {
 eqBtn.addEventListener('click', () => {
     if (morpherState.mode === 'calculator') {
         // Play button sound 
-        const audio = new Audio("sound/Enter_1time.mp3");
+        const audio = new Audio("./sound/Enter_1time.mp3");
         audio.volume = 0.5;
         audio.play();
 
@@ -286,7 +286,7 @@ eqBtn.addEventListener('click', () => {
                 break;
             default:
                 // Unidentified code was entered, play the generic sound and effect
-                const audio = new Audio("sound/Enter.mp3");
+                const audio = new Audio("./sound/Enter.mp3");
                 audio.volume = 0.5;
                 audio.play();
 
@@ -429,7 +429,7 @@ function stopMusic() {
 // this will repeat the instrumental theme forever or until the user toggles
 // src: https://code-boxx.com/background-music-html/
 backgroundAudio.onended = () => {
-    backgroundAudio.src = 'sound/Power Rangers in Space Instrumental Theme.mp3';
+    backgroundAudio.src = './sound/Power Rangers in Space Instrumental Theme.mp3';
     backgroundAudio.pause();
     backgroundAudio.load();
     backgroundAudio.play();
@@ -549,7 +549,7 @@ const display335 = () => {
 }
 
 const display259 = () => {
-    const audio = new Audio("sound/259.mp3");
+    const audio = new Audio("./sound/259.mp3");
     audio.play();
 
     let cycleTime = 250;
@@ -597,7 +597,7 @@ const display761 = () => {
 }
 
 const display108 = () => {
-    const audio = new Audio("sound/108.mp3");
+    const audio = new Audio("./sound/108.mp3");
     audio.play();
 
     let cycleTime = 140;
@@ -626,7 +626,7 @@ const display108 = () => {
 }
 
 const display541 = () => {
-    const audio = new Audio("sound/541.mp3");
+    const audio = new Audio("./sound/541.mp3");
     audio.play();
 
     let cycleTime = 160;
@@ -723,7 +723,7 @@ async function playMinigame912() {
         return 2000;
     }
 
-    let audio = new Audio("sound/912_minigame.mp3");
+    let audio = new Audio("./sound/912_minigame.mp3");
     audio.play();
     
     let scores = 0;
@@ -740,13 +740,13 @@ async function playMinigame912() {
         const answer = await getUserAnswer(timeout = determineTimeout());
         
         if (answer === randomNumber) {
-            audio = new Audio("sound/correct_minigame.mp3");
+            audio = new Audio("./sound/correct_minigame.mp3");
             audio.play();
             scores++;
         } else {
             lives--;
             displayLives(lives);
-            audio = new Audio("sound/incorrect_lostalife_minigame.mp3");
+            audio = new Audio("./sound/incorrect_lostalife_minigame.mp3");
             audio.play();
         }
 
@@ -755,7 +755,7 @@ async function playMinigame912() {
     }
 
     // play sound and effect when the game ends
-    audio = new Audio("sound/end_minigame.mp3");
+    audio = new Audio("./sound/end_minigame.mp3");
     audio.play();
 
     let cycleTime = 325;
@@ -830,10 +830,10 @@ const enableFullUI = (mode) => {
 prevExprs.addEventListener('click', () => {
     if (morpherState.isOpen) {
         // Minor bug: the first time we close the morpher, the transition doesn't look very smooth
-        morpher.src = "/img/closed_morpher_no_background.png";
+        morpher.src = "./img/closed_morpher_no_background.png";
         morpherState.isOpen = false;
         
-        const audio = new Audio("sound/lid_close.mp3");
+        const audio = new Audio("./sound/lid_close.mp3");
         audio.play();
 
         enablePartialUI();
@@ -846,12 +846,12 @@ modeSwitchBtn.addEventListener('click', () => {
     disableCommunicating();
     
     if (morpherState.mode === 'ranger') {
-        const audio = new Audio("sound/morpher_on.mp3");
+        const audio = new Audio("./sound/morpher_on.mp3");
         audio.play();
         blinkAllLeds();
         switchAtXImg.style.opacity = 0;
     } else if (morpherState.mode === 'calculator') {
-        const audio = new Audio("sound/physical_switch.mp3");
+        const audio = new Audio("./sound/physical_switch.mp3");
         audio.play();
         switchAtXImg.style.opacity = 1;
     }
