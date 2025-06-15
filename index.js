@@ -16,7 +16,8 @@ const leds = [
 ];
 const modeSwitchBtn = document.querySelector('.mode-switch-button');
 const switchAtXImg = document.querySelector('#switch-at-X');
-const morpher = document.querySelector('#morpher');
+const openMorpherImage = document.querySelector('#open-morpher');
+const closedMorpherImage = document.querySelector('#closed-morpher');
 const morpherState = {
     isOpen: true,
     mode: 'calculator', // 'calculator' or 'ranger'
@@ -141,7 +142,8 @@ acBtn.addEventListener('click', () => {
 
     // Also open the morpher if it is closed
     if (!morpherState.isOpen) {
-        morpher.src = "./img/open_morpher_no_background.png"
+        openMorpherImage.style.opacity = 1;
+        closedMorpherImage.style.opacity = 0;
         morpherState.isOpen = true;
         
         enableFullUI(morpherState.mode);
@@ -829,8 +831,8 @@ const enableFullUI = (mode) => {
 // Close the morpher
 prevExprs.addEventListener('click', () => {
     if (morpherState.isOpen) {
-        // Minor bug: the first time we close the morpher, the transition doesn't look very smooth
-        morpher.src = "./img/closed_morpher_no_background.png";
+        closedMorpherImage.style.opacity = 1;
+        openMorpherImage.style.opacity = 0;
         morpherState.isOpen = false;
         
         const audio = new Audio("./sound/lid_close.mp3");

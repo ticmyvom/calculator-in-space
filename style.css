@@ -44,10 +44,25 @@ body {
   align-items: center;
 }
 
-#morpher {
+.morpher {
   width: 60%;
   height: auto;
   display: block;
+}
+
+#open-morpher {
+  opacity: 1;
+}
+
+#closed-morpher {
+  /* Remove this image from the document flow */ 
+  /* Only change the opacity to show a morpher is open/closed */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  opacity: 0;
 }
 
 .operator-button {
