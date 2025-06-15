@@ -687,6 +687,7 @@ async function playMinigame912() {
 
     async function getUserAnswer(timeout = 2000) {
         return new Promise((resolve) => {
+            // console.log(timeout, scores);
             let answered = false;
 
             const handleClick912 = (event) => {
@@ -718,10 +719,9 @@ async function playMinigame912() {
     }
 
     const determineTimeout = () => {
-        if (scores > 5) return 1750;
-        if (scores > 10) return 1500;
-        if (scores > 15) return 1250;
-        if (scores > 20) return 1000;
+        if (scores > 15) return 1000;
+        if (scores > 10) return 1250;
+        if (scores > 5) return 1500;
         return 2000;
     }
 
