@@ -67,16 +67,6 @@ const sounds = {
     "correct": new Audio("./sound/correct_minigame.mp3"),
     "incorrect_lostalife": new Audio("./sound/incorrect_lostalife_minigame.mp3"),
     "end": new Audio("./sound/end_minigame.mp3"),
-    "0": new Audio("./sound/0.mp3"),
-    "1": new Audio("./sound/1.mp3"),
-    "2": new Audio("./sound/2.mp3"),
-    "3": new Audio("./sound/3.mp3"),
-    "4": new Audio("./sound/4.mp3"),
-    "5": new Audio("./sound/5.mp3"),
-    "6": new Audio("./sound/6.mp3"),
-    "7": new Audio("./sound/7.mp3"),
-    "8": new Audio("./sound/8.mp3"),
-    "9": new Audio("./sound/9.mp3"),
     "communicating": new Audio("./sound/communicating.mp3"),
     "lid_open": new Audio("./sound/lid_open.mp3"),
     "lid_close": new Audio("./sound/lid_close.mp3"),
@@ -85,6 +75,23 @@ const sounds = {
     "morpher_on": new Audio("./sound/morpher_on.mp3"),
     "physical_switch": new Audio("./sound/physical_switch.mp3"),
 }
+
+const numbersSound = {};
+for (let i = 0; i < 10; i++) {
+    numbersSound[i] = createAudioPool(`./sound/${i}.mp3`);
+}
+
+function createAudioPool(src, size = 5) {
+    const pool = new Array(size).fill().map(() => new Audio(src));
+    let index = 0;
+
+    return () => {
+        const audio = pool[index];
+        audio.currentTime = 0;
+        audio.play();
+        index = (index + 1) % pool.length;
+    };
+};
 
 function createEnum(values) {
     const enumObject = {};
@@ -198,9 +205,7 @@ function updateDisplay(content) {
 
 // Play button sound 
 const annouceNumber = (number) => {
-    // const sound = sounds[number].cloneNode();
-    // sound.play();
-    sounds[number].play();
+    numbersSound[+number]();
 }
 
 numBtns.forEach((numBtn) => {
