@@ -49,12 +49,7 @@ const morphSounds = [
     toy335,
     toy335,
     toy335,
-    new Audio("./sound/335_1.mp3"),
-    new Audio("./sound/335_2.mp3"),
     new Audio("./sound/335_blueranger.mp3"),
-    new Audio("./sound/335_long.mp3"),
-    new Audio("./sound/335_longest.mp3"), 
-    new Audio("./sound/335_powerranger.mp3"),
     new Audio("./sound/335_powerranger.mp3"),
 ];
 
