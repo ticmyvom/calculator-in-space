@@ -365,8 +365,12 @@ function calculate() {
     if (isNaN(num2)) return; // so that we don't evaluate "num1--"
 
     let result = operate(operator, num1, num2);
-    result = parseFloat(result.toFixed(decimals));
-    display.textContent = result;
+    if (result !== "lma0") { // when dividing by 0, result is "lma0"
+        result = parseFloat(result.toFixed(decimals));
+        display.textContent = result;
+    } else {
+        display.textContent = '';
+    }
     setCalculatorState(calcState.num1);
     // console.log(num1, operator, num2, '=', result);
 
