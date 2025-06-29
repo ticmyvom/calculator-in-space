@@ -271,3 +271,17 @@ button {
   /* prevent double-click on most elements */
   touch-action: manipulation; 
 }
+
+.flying-number {
+  position: absolute;
+  color: yellow;
+  font-weight: bold;
+  opacity: 0.7;
+
+  pointer-events: none;
+
+  /* An element with greater stack order is always in front of another element with lower stack order. */
+  z-index: 1000;
+
+  transition: transform .6s ease-in-out;
+}

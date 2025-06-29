@@ -749,6 +749,8 @@ async function playMinigame912() {
         return 2000;
     }
 
+    disableNumberEffect();
+
     morpherState.playingMinigame912 = true;
 
     sounds["912"].play();
@@ -863,6 +865,22 @@ prevExprs.addEventListener('click', () => {
     }
 });
 
+function handleNumberEffect(event) {
+        animateNumberToCenter(event.currentTarget);
+}
+
+function disableNumberEffect() {
+    numBtns.forEach((numBtn) => {
+        numBtn.removeEventListener('click', handleNumberEffect);
+    });
+}
+
+function enableNumberEffect() {
+    numBtns.forEach((numBtn) => {
+        numBtn.addEventListener('click', handleNumberEffect);
+    });
+}
+
 // Toggle between modes and update UI as needed
 modeSwitchBtn.addEventListener('click', () => {
     morpherState.mode = (morpherState.mode == 'ranger') ? 'calculator' : 'ranger';
@@ -872,11 +890,50 @@ modeSwitchBtn.addEventListener('click', () => {
         sounds["morpher_on"].play();
         blinkAllLeds();
         switchAtXImg.style.opacity = 0;
+
+        enableNumberEffect();
+
     } else if (morpherState.mode === 'calculator') {
         sounds["physical_switch"].play();
         switchAtXImg.style.opacity = 1;
+        // Optional todo: clean up all LED effect
+        
+        // Clean up animateNumberToCenter
+        disableNumberEffect()
     }
 
     if (morpherState.isOpen) enableFullUI(morpherState.mode);
 })
 
+function animateNumberToCenter(button) {
+    const rect = button.getBoundingClientRect();
+    const clone = button.cloneNode(true);
+    clone.classList.add("flying-number");
+
+    // Position clone exactly where the button is
+    clone.style.left = `${rect.left}px`;
+    clone.style.top = `${rect.top}px`;
+
+    // Setting starting transform
+    clone.style.transform = "translate(0, 0) scale(1)";
+    document.body.appendChild(clone);
+
+    // Force a reflow by reading offsetHeight
+    clone.offsetHeight;
+
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    const deltaX = centerX - rect.left - rect.width / 2;
+    const deltaY = centerY - rect.top - rect.height / 2;
+
+    // Tell the browser to perform an animation
+    requestAnimationFrame(() => {
+        clone.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(300)`;
+    });
+
+    // Clean up at the end of the animation
+    setTimeout(() => {
+        clone.remove();
+    }, 500) // a bit less than the transition duration in the CSS file
+}
