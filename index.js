@@ -347,7 +347,7 @@ function calculate() {
         parsedInput = input.match(validExpression).groups;
     } catch (e)  {
         if (e instanceof TypeError) {
-            alert("Oops! This calculator is not compatible with the scientific notation at the moment.");
+            alert("Oops! This calculator is not compatible with the scientific notation at the moment. Or, make sure your decimal number has a defined decimal/fraction part.");
             ceBtn.click(); // to clear the current expression display
             return;
         } else {
@@ -365,12 +365,8 @@ function calculate() {
     if (isNaN(num2)) return; // so that we don't evaluate "num1--"
 
     let result = operate(operator, num1, num2);
-    if (result !== "lma0") { // when dividing by 0, result is "lma0"
-        result = parseFloat(result.toFixed(decimals));
-        display.textContent = result;
-    } else {
-        display.textContent = '';
-    }
+    result = parseFloat(result.toFixed(decimals));
+    display.textContent = result;
     setCalculatorState(calcState.num1);
     // console.log(num1, operator, num2, '=', result);
 
